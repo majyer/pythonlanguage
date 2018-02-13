@@ -1,0 +1,5 @@
+appium:
+ - devices: emulator-5554
+   port: 4723
+   config: appium --port 4723 --bootstrap-port 4733 --device-name emulator-5554
+   platformName: android
