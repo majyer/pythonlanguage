@@ -34,6 +34,19 @@ def get_devices():
     return operateYaml.getYam(PATH("../devices.yaml"))
 ga = get_devices()
 
+def Creatsuite():
+    testunit = unittest.TestSuite()
+
+    #find the test cases
+    discover = unittest.defaultTestLoader.discover(case_path, pattern='Test_*.py', top_level_dir=None)
+
+    #add test cases to test container
+    for test_suite in discover:
+        for casename in test_suite:
+            testunit.addTest(casename)
+        print testunit
+    return testunit
+
 def runnerCaseApp(l_devices):
     start_test_time = dataToString.getStrTime(time.localtime(), "%Y-%m-%d %H:%M %p")
     starttime = datetime.datetime.now()
@@ -67,6 +80,26 @@ def runnerPool():
 def open_web_server():
     web_server = HTTPServer((common.HOST, common.PORT), myserver.myHandler)
     web_server.serve_forever()
+
+# if os.path.exists(tdresult):
+#     filename = tdresult + "\\" + now + "_result.html"
+#     fp = file(filename, 'wb')
+#     #defined test report
+#     runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title=u'Appium测试报告', description=u'用例详情：')
+
+#     #run test case
+#     runner.run(test_case)
+#     fp.close()  #close report file
+# else:
+#     os.mkdir(tdresult)
+#     filename = tdresult + "\\" + now + "_result.html"
+#     fp = file(filename, 'wb')
+#     #define test report
+#     runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title=u'Appium测试报告', description=u'用例详情：')
+
+#     #run test cases
+#     runner.run(test_case)
+#     fp.close()  #close report file
 
 if __name__ == '__main__':
 	ga = get_devices()
